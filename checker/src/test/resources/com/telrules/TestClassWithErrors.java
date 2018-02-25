@@ -13,6 +13,8 @@ public class TestClassWithErrors {
         String foo; // Not OK
         Integer iInt; //Ok
         Integer nt; //Not Ok
+        Map hNt; //Ok
+        Map nt; //Ok
     }
 
 }

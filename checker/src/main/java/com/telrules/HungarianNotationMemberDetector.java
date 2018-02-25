@@ -18,7 +18,8 @@ public class HungarianNotationMemberDetector {
 
     enum CheckerDefinition {
         STRING(new String[] {"String"}, "s[A-Z0-9].*"),
-        INT(new String[] {"Integer", "int"}, "i[A-Z0-9].*")
+        INT(new String[] {"Integer", "int"}, "i[A-Z0-9].*"),
+        Map(new String[] {"Map", "int"}, "h[A-Z0-9].*")
         ;
 
         private final String[] cls;
