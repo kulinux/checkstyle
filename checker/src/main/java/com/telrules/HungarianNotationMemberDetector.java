@@ -1,12 +1,34 @@
 package com.telrules;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class HungarianNotationMemberDetector {
 
-    private Pattern pattern = Pattern.compile("m[A-Z0-9].*");
+    public boolean matchOkVarName(String type, String variableName) {
+        return Arrays.asList(CheckerDefinition.values())
+            .stream()
+            .filter(x -> Arrays.asList(x.cls).contains(type))
+            .map(x -> x.patternOk )
+            .map(Pattern::compile)
+            .map(x -> x.matcher(variableName).matches())
+            .findAny()
+            .orElse(false);
+    }
 
-    public boolean detectsNotation(String variableName) {
-        return pattern.matcher(variableName).matches();
+    enum CheckerDefinition {
+        STRING(new String[] {"String"}, "s[A-Z0-9].*"),
+        INT(new String[] {"Integer", "int"}, "i[A-Z0-9].*")
+        ;
+
+        private final String[] cls;
+        private final String patternOk;
+
+        CheckerDefinition(String[] cls, String patternOk) {
+            this.cls = cls;
+            this.patternOk = patternOk;
+        }
+
+
     }
 }
