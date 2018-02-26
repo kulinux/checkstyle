@@ -15,6 +15,8 @@ public class TestClassWithErrors {
         Integer nt; //Not Ok
         Map hNt; //Ok
         Map nt; //Ok
+        List vList; //Ok
+        List list; //Not Ok
     }
 
 }

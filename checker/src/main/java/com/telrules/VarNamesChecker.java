@@ -5,7 +5,7 @@ import com.puppycrawl.tools.checkstyle.api.*;
 
 
 
-public class VarNamesChecker extends Check {
+public class VarNamesChecker extends AbstractCheck {
 
     private static final String CATCH_MSG = "TRules said no. ";
 
@@ -14,6 +14,16 @@ public class VarNamesChecker extends Check {
     @Override
     public int[] getDefaultTokens() {
         return new int[] {TokenTypes.VARIABLE_DEF, TokenTypes.PARAMETER_DEF};
+    }
+
+    @Override
+    public int[] getAcceptableTokens() {
+        return this.getDefaultTokens();
+    }
+
+    @Override
+    public int[] getRequiredTokens() {
+        return new int[0];
     }
 
     @Override
