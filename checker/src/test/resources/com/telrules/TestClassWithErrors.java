@@ -3,6 +3,7 @@ package com.telrules;
 public class TestClassWithErrors {
 
 
+    private String mSMono;
 
     /**
      * Method scope vars should not be tested
@@ -17,6 +18,7 @@ public class TestClassWithErrors {
         Map nt; //Ok
         List vList; //Ok
         List list; //Not Ok
+        OtherClass cls;
     }
 
 }

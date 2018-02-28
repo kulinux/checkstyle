@@ -29,10 +29,16 @@ public class VarNamesChecker extends AbstractCheck {
     @Override
     public void visitToken(DetailAST aAST) {
 
-        String variableName = findVariableName(aAST);
-        String type = findVariableType(aAST);
-        if (itsAFieldVariable(aAST) && detector.matchOkVarName(type, variableName) == false ) {
-            reportStyleError(aAST, variableName);
+        if( aAST.getParent() != null &&
+                aAST.getParent().getType() == TokenTypes.OBJBLOCK )
+        {
+            return;
+        }
+
+        String sVAriableName = findVariableName(aAST);
+        String sType = findVariableType(aAST);
+        if (itsAFieldVariable(aAST) && detector.matchOkVarName(sType, sVAriableName) == false ) {
+            reportStyleError(aAST, sVAriableName);
         }
     }
 
@@ -51,8 +57,8 @@ public class VarNamesChecker extends AbstractCheck {
                 || aAST.getType() == TokenTypes.VARIABLE_DEF;
     }
 
-    private void reportStyleError(DetailAST aAST, String variableName) {
-        log(aAST.getLineNo(), CATCH_MSG + variableName);
+    private void reportStyleError(DetailAST aAST, String sVariableName) {
+        log(aAST.getLineNo(), CATCH_MSG + sVariableName);
     }
 
 }

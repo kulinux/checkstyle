@@ -1,19 +1,30 @@
 package com.telrules;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class HungarianNotationMemberDetector {
 
     public boolean matchOkVarName(String type, String variableName) {
-        return Arrays.asList(CheckerDefinition.values())
-            .stream()
-            .filter(x -> Arrays.asList(x.cls).contains(type))
+
+
+        Optional<CheckerDefinition> checker = Arrays.asList(CheckerDefinition.values())
+                .stream()
+                .filter(x -> Arrays.asList(x.cls).contains(type))
+                .findAny();
+
+        if( !checker.isPresent() )
+        {
+            return true;
+        }
+
+        return checker
             .map(x -> x.patternOk )
             .map(Pattern::compile)
             .map(x -> x.matcher(variableName).matches())
-            .findAny()
-            .orElse(false);
+            .orElse( Boolean.FALSE );
     }
 
     enum CheckerDefinition {
